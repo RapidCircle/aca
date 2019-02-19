@@ -1,0 +1,17 @@
+<h1>Resources marked for archiving</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>            
+        </tr>
+    </thead>
+    <tbody>
+        {{#each value}}
+        <tr>
+            <td>{{this.fields.resourceId}}</td>
+            <td>{{this.fields.resourceName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

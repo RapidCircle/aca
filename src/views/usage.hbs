@@ -1,0 +1,35 @@
+<h1>Azure Resource Usage</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">resourceGroup</th>
+      <th scope="col">type</th>
+      <th scope="col">location</th>
+      <th scope="col">metricType</th>
+      <th scope="col">metricHighest</th>
+      <!--<th scope="col">from</th>
+      <th scope="col">to</th>-->
+      <th scope="col">quantity</th>
+      <th scope="col">subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each resources}}
+      <tr>
+        <td><a target="_blank" href="https://portal.azure.com/#@RapidCircle.com/resource/{{this.id}}">{{this.id}}</a></td>
+        <td>{{this.name}}</td>
+        <td>{{this.resourceGroup}}</td>
+        <td>{{this.type}}</td>
+        <td>{{this.location}}</td>
+        <td>{{this.metricType}}</td>
+        <td>{{this.metricHighest}}</td>
+        <!--<td>{{this.from}}</td>
+        <td>{{this.to}}</td>-->
+        <td>{{this.quantity}}</td>
+        <td>{{this.subtotal}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
