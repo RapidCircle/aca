@@ -27,38 +27,39 @@ the more consumption based nature of software these days (thank you Cloud).
 Here is a list of variables that need to be set to ensure this solution operates as intended:
 
 You will need to setup a Service Principal for delegated access towards Azure AD (identify user, and trim security) and SharePoint (storing enriched Azure data)
-OAUTH_APP_ID                = configure @ http://aca_url/setup/consent 
-OAUTH_APP_PASSWORD          = configure @ http://aca_url/setup/consent
+| Variable | Provisioned at |
+| OAUTH_APP_ID | configure @ http://aca_url/setup/consent |
+| OAUTH_APP_PASSWORD |configure @ http://aca_url/setup/consent |
 
 Request consent to access certain Graph scopes so ACA can perform operations on behalve of the user.
-OAUTH_SCOPES                = 'profile offline_access user.read sites.manage.all'
+| OAUTH_SCOPES |'profile offline_access user.read sites.manage.all' |
 
-OAUTH_REDIRECT_URI          = 
+| OAUTH_REDIRECT_URI | configure @ http://aca_url/setup/firsttime |
 
 configured @ deployment / application settings
-OAUTH_AUTHORITY             = https://login.microsoftonline.com/common
-OAUTH_ID_METADATA           = /v2.0/.well-known/openid-configuration
-OAUTH_AUTHORIZE_ENDPOINT    = /oauth2/v2.0/authorize
-OAUTH_TOKEN_ENDPOINT        = /oauth2/v2.0/token
+| OAUTH_AUTHORITY | https://login.microsoftonline.com/common | 
+| OAUTH_ID_METADATA | /v2.0/.well-known/openid-configuration | 
+| OAUTH_AUTHORIZE_ENDPOINT  | /oauth2/v2.0/authorize | 
+| OAUTH_TOKEN_ENDPOINT | /oauth2/v2.0/token |
 
 You will need to setup a Service Principal for automation with role based authorization already baked in. This can be done by using the Azure CLI like:
 ```az ad sp create-for-rbac```
-RBAC_APP_ID                 = configure @ http://aca_url/setup/rbac
-RBAC_APP_PASSWORD           = configure @ http://aca_url/setup/rbac
+| RBAC_APP_ID | configure @ http://aca_url/setup/rbac |
+| RBAC_APP_PASSWORD | configure @ http://aca_url/setup/rbac |
 
-tenantId                    = configure @ http://aca_url/setup/subscription
-subscriptionId              = configure @ http://aca_url/setup/subscription
+| tenantId | configure @ http://aca_url/setup/subscription |
+| subscriptionId | configure @ http://aca_url/setup/subscription |
 
-graphSiteId                 = configure @ http://aca_url/setup/storage
-graphListId                 = configure @ http://aca_url/setup/storage
+| graphSiteId | configure @ http://aca_url/setup/storage |
+| graphListId  | configure @ http://aca_url/setup/storage |
 
-azureDomain                 = RapidCircle.com
-archiveGroup                = configure @ http://aca_url/setup/archive
-archiveAccount              = configure @ http://aca_url/setup/archive
-archiveAccountKey           = configure @ http://aca_url/setup/archive
+| azureDomain | RapidCircle.com |
+| archiveGroup | configure @ http://aca_url/setup/archive |
+| archiveAccount | configure @ http://aca_url/setup/archive |
+| archiveAccountKey | configure @ http://aca_url/setup/archive |
 
-DEBUG                       = info:* warning:* error:* verbose:*
-GraphDebug                  = off
+| DEBUG | info:* warning:* error:* verbose:* |
+| GraphDebug | off |
 
 # Deployment
 ACA has been prepared to run as a Docker image, which makes it easy to be used in the Azure Docker Container Apps model.
