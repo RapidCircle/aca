@@ -27,10 +27,11 @@ the more consumption based nature of software these days (thank you Cloud).
 Here is a list of variables that need to be set to ensure this solution operates as intended:
 
 You will need to setup a Service Principal for delegated access towards Azure AD (identify user, and trim security) and SharePoint (storing enriched Azure data)
+
 | Variable | Provisioned at |
+| --- | --- |
 | OAUTH_APP_ID | configure @ http://aca_url/setup/consent |
 | OAUTH_APP_PASSWORD |configure @ http://aca_url/setup/consent |
-
 Request consent to access certain Graph scopes so ACA can perform operations on behalve of the user.
 | OAUTH_SCOPES |'profile offline_access user.read sites.manage.all' |
 
