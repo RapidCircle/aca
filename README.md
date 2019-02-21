@@ -2,8 +2,7 @@
 ACA aggregates Azure Resources, Consumption and Metric usage data. This data can be used to report on Azure consumption for cost-reduction purposes. Additionally it contains automation scripts triggered by a Resource status in the SharePoint list to unburden the consultants work.
 
 # License
-The digital artifacts in this solution are SSPL licensed (see LICENSE.md). SSPL is fairly new and not officially recognized as an "Open Source" type license (yet). SSPL was developed by MongoDB, Inc which switched to SSPL because of
-the more consumption based nature of software these days (thank you Cloud).
+The digital artifacts in this solution are **SSPL licensed** (see LICENSE.md). SSPL is fairly new and not officially recognized as an "Open Source" type license (yet). SSPL was developed by MongoDB, Inc which switched to SSPL because of the more consumption based nature of software these days (thank you Cloud).
 
 # Prerequisites
 * Visual Studio Code or other editor (e.g. Atom)
@@ -13,6 +12,7 @@ the more consumption based nature of software these days (thank you Cloud).
 * Docker Compose
 
 # Getting Started (fresh install)
+``` TODO: needs update ```
 1. ```git clone https://github.com/RapidCircle/aca.git```
 2. ```npm install``` (install depedencies in the automation project)
 3. ```npm run start``` (run the automation project)   OR   Press F5 in VS Code (debugger mode)
