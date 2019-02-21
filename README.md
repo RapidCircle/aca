@@ -32,7 +32,7 @@ You will need to setup a Service Principal for delegated access towards Azure AD
 | --- | --- |
 | OAUTH_APP_ID | configure @ http://aca_url/setup/consent |
 | OAUTH_APP_PASSWORD |configure @ http://aca_url/setup/consent |
-Request consent to access certain Graph scopes so ACA can perform operations on behalve of the user.
+| Request consent to access certain Graph scopes so ACA can perform operations on behalve of the user. |
 | OAUTH_SCOPES |'profile offline_access user.read sites.manage.all' |
 
 | OAUTH_REDIRECT_URI | configure @ http://aca_url/setup/firsttime |
