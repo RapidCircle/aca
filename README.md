@@ -64,9 +64,11 @@ ACA has been prepared to run as a Docker image, which makes it easy to be used i
 3. Workflow engine running on an Interval, processing newly created workflows. 
 
 # Azure Cleansing Progress
-1. Removed empty Resource groups
-2. Removed unused VHDs
-3. Removed OLD blobs (2013 and older)
+1. [x] Delete empty Resource groups (unstable)
+2. [ ] Delete unused VHDs
+3. [x] Delete/Archive (classic) and normal Storage Accounts blobs
+4. [x] Delete App Services
+
 
 # Todos
 1. [ ] resolving the chosen/correct SharePoint site to deploy the SharePoint list
