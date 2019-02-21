@@ -30,26 +30,26 @@ You will need to setup a Service Principal for delegated access towards Azure AD
 
 | Variable | Provisioned at |
 | --- | --- |
-| 'OAUTH_APP_ID' | configure @ http://aca_url/setup/consent |
-| 'OAUTH_APP_PASSWORD' |configure @ http://aca_url/setup/consent |
-| 'OAUTH_SCOPES' | 'profile offline_access user.read sites.manage.all' |
-| 'OAUTH_REDIRECT_URI' | configure @ http://aca_url/setup/firsttime |
-| 'OAUTH_AUTHORITY' | https://login.microsoftonline.com/common | 
-| 'OAUTH_ID_METADATA' | /v2.0/.well-known/openid-configuration | 
-| 'OAUTH_AUTHORIZE_ENDPOINT'  | /oauth2/v2.0/authorize | 
-| 'OAUTH_TOKEN_ENDPOINT' | /oauth2/v2.0/token |
-| 'RBAC_APP_ID' | configure @ http://aca_url/setup/rbac |
-| 'RBAC_APP_PASSWORD' | configure @ http://aca_url/setup/rbac |
-| 'tenantId' | configure @ http://aca_url/setup/subscription |
-| 'subscriptionId' | configure @ http://aca_url/setup/subscription |
-| 'graphSiteId' | configure @ http://aca_url/setup/storage |
-| 'graphListId'  | configure @ http://aca_url/setup/storage |
-| 'azureDomain' | RapidCircle.com |
-| 'archiveGroup' | configure @ http://aca_url/setup/archive |
-| 'archiveAccount' | configure @ http://aca_url/setup/archive |
-| 'archiveAccountKey' | configure @ http://aca_url/setup/archive |
-| 'DEBUG' | info:* warning:* error:* verbose:* |
-| 'GraphDebug' | off |
+| `OAUTH_APP_ID` | configure @ http://aca_url/setup/consent |
+| `OAUTH_APP_PASSWORD` |configure @ http://aca_url/setup/consent |
+| `OAUTH_SCOPES` | `profile offline_access user.read sites.manage.all` |
+| `OAUTH_REDIRECT_URI` | configure @ http://aca_url/setup/firsttime |
+| `OAUTH_AUTHORITY` | `https://login.microsoftonline.com/common` | 
+| `OAUTH_ID_METADATA` | `/v2.0/.well-known/openid-configuration` | 
+| `OAUTH_AUTHORIZE_ENDPOINT` | `/oauth2/v2.0/authorize` | 
+| `OAUTH_TOKEN_ENDPOINT` | `/oauth2/v2.0/token` |
+| `RBAC_APP_ID` | configure @ http://aca_url/setup/rbac |
+| `RBAC_APP_PASSWORD` | configure @ http://aca_url/setup/rbac |
+| `tenantId` | configure @ http://aca_url/setup/subscription |
+| `subscriptionId` | configure @ http://aca_url/setup/subscription |
+| `graphSiteId` | configure @ http://aca_url/setup/storage |
+| `graphListId`  | configure @ http://aca_url/setup/storage |
+| `azureDomain` | RapidCircle.com |
+| `archiveGroup` | configure @ http://aca_url/setup/archive |
+| `archiveAccount` | configure @ http://aca_url/setup/archive |
+| `archiveAccountKey` | configure @ http://aca_url/setup/archive |
+| `DEBUG` | info:* warning:* error:* verbose:* |
+| `GraphDebug` | off |
 
 You will need to setup a Service Principal for automation with role based authorization already baked in. This can be done by using the Azure CLI like:
 ```az ad sp create-for-rbac```
@@ -79,7 +79,7 @@ ACA has been prepared to run as a Docker image, which makes it easy to be used i
 8. [ ] ensure normal stdout is not logged to stderr in pm2
 
 # Bugs
-[ ] AccessToken expires during sync of resources due to long running operation. 
+1. [ ] AccessToken expires during sync of resources due to long running operation. 
 
 # Notes
 * The workflow engine only processes marked Azure resources. When a resource is marked and picked up for workflow processing, the workflow engine refreshes (if needed) the accessToken towards MS Graph by using the oauthToken (refresh) of the original user marking the item for workflow processing.
