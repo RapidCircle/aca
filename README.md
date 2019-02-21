@@ -32,22 +32,12 @@ You will need to setup a Service Principal for delegated access towards Azure AD
 | --- | --- |
 | OAUTH_APP_ID | configure @ http://aca_url/setup/consent |
 | OAUTH_APP_PASSWORD |configure @ http://aca_url/setup/consent |
-
-Request consent to access certain Graph scopes so ACA can perform operations on behalve of the user.
-
 | OAUTH_SCOPES | 'profile offline_access user.read sites.manage.all' |
 | OAUTH_REDIRECT_URI | configure @ http://aca_url/setup/firsttime |
-
-configured @ deployment / application settings
-
 | OAUTH_AUTHORITY | https://login.microsoftonline.com/common | 
 | OAUTH_ID_METADATA | /v2.0/.well-known/openid-configuration | 
 | OAUTH_AUTHORIZE_ENDPOINT  | /oauth2/v2.0/authorize | 
 | OAUTH_TOKEN_ENDPOINT | /oauth2/v2.0/token |
-
-You will need to setup a Service Principal for automation with role based authorization already baked in. This can be done by using the Azure CLI like:
-```az ad sp create-for-rbac```
-
 | RBAC_APP_ID | configure @ http://aca_url/setup/rbac |
 | RBAC_APP_PASSWORD | configure @ http://aca_url/setup/rbac |
 | tenantId | configure @ http://aca_url/setup/subscription |
@@ -60,6 +50,10 @@ You will need to setup a Service Principal for automation with role based author
 | archiveAccountKey | configure @ http://aca_url/setup/archive |
 | DEBUG | info:* warning:* error:* verbose:* |
 | GraphDebug | off |
+
+You will need to setup a Service Principal for automation with role based authorization already baked in. This can be done by using the Azure CLI like:
+```az ad sp create-for-rbac```
+
 
 # Deployment
 ACA has been prepared to run as a Docker image, which makes it easy to be used in the Azure Docker Container Apps model.
