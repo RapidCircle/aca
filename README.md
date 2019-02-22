@@ -6,7 +6,7 @@ The digital artifacts in this solution are **SSPL licensed** (see LICENSE.md). S
 
 # Status
 
-| **UNSTABLE** | Working towards a releasable version, use at own risk |
+**UNSTABLE** - Working towards a releasable version, use at own risk
 
 # Prerequisites
 * Visual Studio Code or other editor (e.g. Atom)
