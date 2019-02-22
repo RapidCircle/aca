@@ -56,7 +56,9 @@ Here is a list of variables that need to be set to ensure this solution operates
 
 
 # Deployment
-ACA has been prepared to run as a Docker image, which makes it easy to be used in the Azure Docker Container Apps model.
+ACA has been prepared to run as a Docker image, which makes it easy to be used in:
+* Azure Web Apps for Containers
+* Azure Kubernetes Services
 
 # Assets
 1. Resource list with flattend consumption data and metric data
@@ -79,6 +81,7 @@ ACA has been prepared to run as a Docker image, which makes it easy to be used i
 6. [ ] workflow: implement Archive VM function 
 7. [ ] job: auto power down VMs (marked with 'Daily shutdown' status)
 8. [ ] ensure normal stdout is not logged to stderr in pm2
+9. [ ] Setup a config UI for configuring Storage Endpoint
 
 # Bugs
 1. [ ] AccessToken expires during sync of resources due to long running operation. 
