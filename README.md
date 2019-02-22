@@ -4,6 +4,10 @@ ACA aggregates Azure Resources, Consumption and Metric usage data. This data can
 # License
 The digital artifacts in this solution are **SSPL licensed** (see LICENSE.md). SSPL is fairly new and not officially recognized as an "Open Source" type license (yet). SSPL was developed by MongoDB, Inc which switched to SSPL because of the more consumption based nature of software these days (thank you Cloud).
 
+# Status
+
+| **UNSTABLE** | Working towards a releasable version, use at own risk |
+
 # Prerequisites
 * Visual Studio Code or other editor (e.g. Atom)
 * Powershell Az module 1.3 or higher (based on PS Core)
