@@ -94,11 +94,41 @@ ACA has been prepared to run as a Docker image, which makes it easy to be used i
 # Notes
 * The workflow engine only processes marked Azure resources. When a resource is marked and picked up for workflow processing, the workflow engine refreshes (if needed) the accessToken towards MS Graph by using the oauthToken (refresh) of the original user marking the item for workflow processing.
 
-# Docker
-To make things even easier and more scalable Rclaimer has been dockerized. The challenge we take is using Linux Alpine as a root image with Powershell / .NET Core installed. The more minimal, the more stable our solution will be. Powershell and Alpine Linux have been a wish of the community dating back to 2016. Here are some threads:
+# Docker resources
+To make things even easier and more scalable ACA has been dockerized. The challenge we take is using Linux Alpine as a root image with Powershell / .NET Core installed. The more minimal, the more stable our solution will be. Powershell and Alpine Linux have been a wish of the community dating back to 2016. Here are some threads:
 * https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6
 * https://github.com/PowerShell/PowerShell/issues/1926
 * https://github.com/dotnet/coreclr/issues/917
 * https://github.com/PowerShell/PowerShell/issues/4605
 * https://hub.docker.com/_/microsoft-powershell
 * https://github.com/PowerShell/PowerShell-Docker
+
+# UI resources
+* https://ant.design/docs/spec/introduce
+* https://ant.design/docs/react/introduce
+* https://ant.design/docs/react/use-with-create-react-app
+* https://facebook.github.io/create-react-app/docs/pre-rendering-into-static-html-files
+* https://github.com/tuchk4/awesome-create-react-app#craft-templates
+
+# Azure Web Apps for Containers resources
+* https://docs.microsoft.com/nl-nl/azure/app-service/containers/tutorial-multi-container-app
+* https://docs.microsoft.com/nl-nl/azure/app-service/containers/app-service-linux-faq
+* https://docs.microsoft.com/nl-nl/azure/app-service/containers/how-to-serve-content-from-azure-storage
+* https://docs.microsoft.com/en-us/azure/devops/pipelines/apps/cd/deploy-docker-webapp?view=azure-devops
+
+# Azure AAD resources
+* https://github.com/AzureAD/passport-azure-ad
+* https://docs.microsoft.com/en-us/azure/aks/aad-integration
+
+# MS Graph resources
+* https://docs.microsoft.com/en-us/graph/api/site-list-subsites?view=graph-rest-1.0
+
+# Managed Applications resources
+* https://docs.microsoft.com/en-us/azure/managed-applications/overview#types-of-managed-applications
+* https://docs.microsoft.com/nl-nl/azure/azure-resource-manager/resource-group-authoring-templates
+* https://docs.microsoft.com/nl-nl/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal
+* https://docs.microsoft.com/en-us/azure/managed-applications/publish-marketplace-app
+* https://docs.microsoft.com/en-us/azure/managed-applications/publish-service-catalog-app
+* https://docs.microsoft.com/en-us/azure/managed-applications/publish-managed-app-definition-quickstart
+* https://docs.microsoft.com/en-us/azure/managed-applications/overview
+* 
