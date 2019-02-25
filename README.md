@@ -109,6 +109,8 @@ To make things even easier and more scalable ACA has been dockerized. The challe
 * https://ant.design/docs/react/use-with-create-react-app
 * https://facebook.github.io/create-react-app/docs/pre-rendering-into-static-html-files
 * https://github.com/tuchk4/awesome-create-react-app#craft-templates
+* https://github.com/facebook/create-react-app
+
 
 # Azure Web Apps for Containers resources
 * https://docs.microsoft.com/nl-nl/azure/app-service/containers/tutorial-multi-container-app
@@ -131,4 +133,13 @@ To make things even easier and more scalable ACA has been dockerized. The challe
 * https://docs.microsoft.com/en-us/azure/managed-applications/publish-service-catalog-app
 * https://docs.microsoft.com/en-us/azure/managed-applications/publish-managed-app-definition-quickstart
 * https://docs.microsoft.com/en-us/azure/managed-applications/overview
-* 
+
+# ARM
+* https://winterdom.com/2018/08/02/rbac-role-assignments-in-arm-templates
+* https://docs.microsoft.com/en-us/azure/managed-applications/publish-marketplace-app
+
+
+# PowerShell Runbook
+* https://docs.microsoft.com/nl-nl/azure/automation/automation-first-runbook-textual-powershell
+* https://docs.microsoft.com/nl-nl/azure/automation/automation-runbook-gallery
+* https://azure.microsoft.com/nl-nl/blog/azure-automation-runbook-input-output-and-nested-runbooks/

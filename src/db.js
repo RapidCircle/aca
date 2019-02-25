@@ -7,7 +7,8 @@
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const path = require('path');
-const dbFile = path.resolve(__dirname, '../data/db.json');
+
+const dbFile = path.resolve(__dirname, process.env.WEBSITES_ENABLE_APP_SERVICE_STORAGE? '/home/db.json' : '../data/db.json');
 const db = low(new FileSync(dbFile));
 
 db.defaults({

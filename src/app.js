@@ -101,7 +101,7 @@ var calendarRouter = require('./routes/calendar');
 var initRouter = require('./routes/init');
 
 var app = express();
-const sessionFile = path.resolve(__dirname, '../data/sessions.json');
+const sessionFile = path.resolve(__dirname, process.env.WEBSITES_ENABLE_APP_SERVICE_STORAGE? '/home/sessions.json': '../data/sessions.json');
 
 // Session middleware
 app.use(session({
