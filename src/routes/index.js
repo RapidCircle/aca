@@ -17,6 +17,17 @@ router.get('/', function(req, res, next) {
   res.render('index', params);
 });
 
+/* GET */
+router.get('/test', async function (req, res, next) {
+
+  let x = Math.floor(Math.random() * Math.floor(10000));
+
+  res.send({
+    amount: x.toString(),
+    description: 'Hello From Express'
+  });
+});
+
 
 
 module.exports = router;

@@ -87,6 +87,7 @@ ACA has been prepared to run as a Docker image, which makes it easy to be used i
 8. [ ] ensure normal stdout is not logged to stderr in pm2
 9. [ ] Setup a config UI for configuring Storage Endpoint
 10. [ ] Support Node.JS based workflows AND Azure Runbook workflows
+11. [ ] Integrate Azure Advisor / cost control => e.g. switching from pay-as-you-go to reserved plans
 
 # Bugs
 1. [ ] AccessToken expires during sync of resources due to long running operation. 

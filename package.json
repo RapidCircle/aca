@@ -5,6 +5,9 @@
   "main": "run.js",
   "scripts": {
     "start": "node run.js",
+    "startServer": "node ./run.js",
+    "startClient": "cd client && yarn start",
+    "buildAll": "echo \"Error: no test specified\" && exit 1",
     "test": ""
   },
   "repository": {
@@ -21,8 +24,10 @@
     "azure-arm-monitor": "^5.2.0",
     "azure-arm-resource": "^7.3.0",
     "azure-arm-storage": "^7.0.0",
+    "concurrently": "^4.1.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",

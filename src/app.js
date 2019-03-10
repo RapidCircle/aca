@@ -4,18 +4,18 @@
  @copyright© 2019 Rapid Circle B.V.
 **/
 
-
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var session = require('express-session');
+const createError = require('http-errors');
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const session = require('express-session');
 const LowDbSessionStore = require('nodejs-msgraph-utils/stores/lowDbSessionStore.js')(session);
-var flash = require('connect-flash');
-var passport = require('passport');
-var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
-var graph = require('./graph');
+const flash = require('connect-flash');
+const passport = require('passport');
+const OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
+const graph = require('./graph');
 const db = require('./db.js');
 const debug = require('nodejs-msgraph-utils/utils/logger.js')('app');
 
@@ -156,6 +156,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 app.use(function(req, res, next) {
   // Set the authenticated user in the
@@ -166,11 +167,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/auth', authRouter);
+app.use('/_api', indexRouter);
+app.use('/_api/users', usersRouter);
+app.use('/_api/auth', authRouter);
 app.use('/calendar', calendarRouter);
-app.use('/init', initRouter);
+app.use('/_api/init', initRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
