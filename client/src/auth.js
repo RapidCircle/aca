@@ -8,8 +8,8 @@ const Loading = () => <div className="animated fadeIn pt-1 text-center">Logging 
 
 
 const userIsAuthenticatedDefaults = {
-  authenticatedSelector: state => state.user && state.user.data !== null,
-  authenticatingSelector: state => state.user && state.user.isLoading,
+  authenticatedSelector: state => false, //state.user && state.user.data !== null,
+  authenticatingSelector: state => false, //state.user && state.user.isLoading,
   wrapperDisplayName: 'UserIsAuthenticated'
 }
 
@@ -31,7 +31,7 @@ export const userIsAdminRedir = connectedRouterRedirect({
 
 const userIsNotAuthenticatedDefaults = {
   // Want to redirect the user when they are done loading and authenticated
-  //authenticatedSelector: state => state.user.data === null && state.user.isLoading === false,
+  authenticatedSelector: state => true, //(!state.user || state.user.data === null) && state.user.isLoading === false,
   wrapperDisplayName: 'UserIsNotAuthenticated'
 }
 
@@ -39,6 +39,6 @@ export const userIsNotAuthenticated = connectedAuthWrapper(userIsNotAuthenticate
 
 export const userIsNotAuthenticatedRedir = connectedRouterRedirect({
   ...userIsNotAuthenticatedDefaults,
-  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/protected',
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/dashboard',
   allowRedirectBack: false
 })

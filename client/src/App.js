@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { login, logout } from './actions/user';
+
 // import { renderRoutes } from 'react-router-config';
 import {
   userIsAuthenticatedRedir,
-  userIsNotAuthenticatedRedir,
-  userIsAdminRedir,
-  userIsAuthenticated,
-  userIsNotAuthenticated
+  userIsNotAuthenticatedRedir
 } from './auth.js';
 
 import Loadable from 'react-loadable';
@@ -17,16 +16,16 @@ import './App.scss';
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
 // Containers
-const DefaultLayout = Loadable({
+const DefaultLayout = userIsAuthenticatedRedir(Loadable({
   loader: () => import('./containers/DefaultLayout'),
   loading
-});
+}));
 
 // Pages
-const Login = Loadable({
+const Login = userIsNotAuthenticatedRedir(Loadable({
   loader: () => import('./views/Pages/Login'),
   loading
-});
+}));
 
 const Register = Loadable({
   loader: () => import('./views/Pages/Register'),
@@ -44,6 +43,19 @@ const Page500 = Loadable({
 });
 
 class App extends Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    window.onmessage = (e) => {
+      if (e.data === 'setloggedin') {
+        dispatch(login({ isAdmin:false }));
+      }
+      else if (e.data === 'setloggedout') {
+        dispatch(logout());
+      }
+    }
+  }
 
   render() {
     return (
@@ -65,4 +77,5 @@ const mapStateToProps = state => ({
   //user: { isLoading:false, data: { test: 123}}
 })
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps)(App);
+

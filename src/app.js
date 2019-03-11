@@ -169,7 +169,7 @@ app.use(function(req, res, next) {
 
 app.use('/_api', indexRouter);
 app.use('/_api/users', usersRouter);
-app.use('/_api/auth', authRouter);
+app.use('/_auth', authRouter);
 app.use('/calendar', calendarRouter);
 app.use('/_api/init', initRouter);
 

@@ -24,7 +24,7 @@ router.get('/signin',
     )(req,res,next);
   },
   function(req, res) {
-    res.redirect('/');
+    res.render('/');
   }
 );
 
@@ -39,7 +39,7 @@ router.post('/callback',
     )(req,res,next);
   },
   function(req, res) {
-    res.redirect('/');
+    res.render('loggedin');
   }
 );
 
@@ -47,7 +47,7 @@ router.get('/signout',
   function(req, res) {
     req.session.destroy(function(err) {
       req.logout();
-      res.redirect('/');
+      res.redirect('http://localhost:3001/');
     });
   }
 );
