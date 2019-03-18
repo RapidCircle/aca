@@ -52,4 +52,18 @@ router.get('/signout',
   }
 );
 
+router.get('/info', 
+  function(req, res) {
+    if (!req.isAuthenticated()) {
+      res.send(401);
+    }
+    else {
+      res.send({
+        username: req.user.profile.email,
+        displayName: req.user.profile.displayName
+      });
+    }
+  }
+);
+
 module.exports = router;

@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { connect } from 'react-redux';
+import { startlogin } from '../../../actions/user.js';
 
-function openLogin() {
-  window.open('http://localhost:3000/_auth/signin')
-}
+
 
 class Login extends Component {
+
+  login() {
+    this.props.startlogin();
+    window.open('http://localhost:3000/_auth/signin');
+    
+  }
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -19,7 +26,7 @@ class Login extends Component {
                     <div>
                       <h2>Unauthorized</h2>
                       <p><b>Azure Cleansing App</b> is configured to use your organisations Azure Active Directory as an identity store. Please click the Login to be redirected to login through Microsoft.</p>
-                      <a href="javascript:void(0);" onClick={openLogin}>
+                      <a href="javascript:void(0);" onClick={this.openLogin}>
                         <Button className="mt-3 btn-lg btn-openid btn-brand" active tabIndex={-1}><i className="fa fa-openid"></i><span>Login</span></Button>
                       </a>
                     </div>
@@ -34,4 +41,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, { startlogin })(Login);

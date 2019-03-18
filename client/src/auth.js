@@ -8,8 +8,8 @@ const Loading = () => <div className="animated fadeIn pt-1 text-center">Logging 
 
 
 const userIsAuthenticatedDefaults = {
-  authenticatedSelector: state => false, //state.user && state.user.data !== null,
-  authenticatingSelector: state => false, //state.user && state.user.isLoading,
+  authenticatedSelector: state => state.user.data !== null,
+  authenticatingSelector: state => state.user.isLoading,
   wrapperDisplayName: 'UserIsAuthenticated'
 }
 
@@ -24,14 +24,14 @@ export const userIsAuthenticatedRedir = connectedRouterRedirect({
 export const userIsAdminRedir = connectedRouterRedirect({
   redirectPath: '/',
   allowRedirectBack: false,
-  authenticatedSelector: state => state.user && state.user.data !== null && state.user.data.isAdmin,
+  authenticatedSelector: state => state.user.data !== null && state.user.data.isAdmin,
   predicate: user => user.isAdmin,
   wrapperDisplayName: 'UserIsAdmin'
 })
 
 const userIsNotAuthenticatedDefaults = {
   // Want to redirect the user when they are done loading and authenticated
-  authenticatedSelector: state => true, //(!state.user || state.user.data === null) && state.user.isLoading === false,
+  authenticatedSelector: state => state.user.data === null && state.user.isLoading === false,
   wrapperDisplayName: 'UserIsNotAuthenticated'
 }
 

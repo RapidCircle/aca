@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node run.js",
     "startServer": "node ./run.js",
-    "startClient": "cd client && yarn start",
+    "startClient": "cd client && npm start",
     "buildAll": "echo \"Error: no test specified\" && exit 1",
     "test": ""
   },

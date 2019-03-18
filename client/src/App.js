@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login, logout } from './actions/user';
+import { checklogin, logout } from './actions/user';
 
 // import { renderRoutes } from 'react-router-config';
 import {
@@ -47,9 +47,11 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
+    dispatch(checklogin());
+
     window.onmessage = (e) => {
       if (e.data === 'setloggedin') {
-        dispatch(login({ isAdmin:false }));
+        dispatch(checklogin());
       }
       else if (e.data === 'setloggedout') {
         dispatch(logout());
@@ -74,7 +76,6 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   user: state.user
-  //user: { isLoading:false, data: { test: 123}}
 })
 
 export default connect(mapStateToProps)(App);
