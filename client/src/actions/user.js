@@ -1,8 +1,7 @@
 import fetch from 'cross-fetch';
 import axios from 'axios';
 import * as constants from '../constants.js';
-import createDebugger from 'debug';
-const debug = createDebugger('actions:user');
+
 
 export const startlogin = data => dispatch => {
   dispatch({
@@ -25,11 +24,11 @@ function getApiData() {
           return response.data
         }
         else {
-          throw new Error(`Bad response from server. ({response.status})`);
+          return logout();
         }
       })
       .then(data => dispatch(loggedin(data)))
-      .catch(err => debug(err))
+      .catch(err => dispatch(logout()))
   }
 }
 

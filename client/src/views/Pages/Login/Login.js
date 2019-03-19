@@ -10,13 +10,17 @@ class Login extends Component {
 
   login = () => {
     this.props.startlogin();
-    let loginWindow = window.open('http://localhost:3000/_auth/signin', 'Login', 'titlbar=no, menubar=no, scrollbars=no, status=no, width=375, height=667, toolbar=no');
+    let loginWindow = window.open('/_auth/signin', 'Login', 'titlbar=no, menubar=no, scrollbars=no, status=no, width=375, height=667, toolbar=no');    
     
-    loginWindow.addEventListener("beforeunload", function (e) {
-      alert('yo');
-    });
     
+    let watcher = setInterval(x => {
+      if (loginWindow.closed) {
+        window.postMessage('checkloggedin');
+        clearInterval(watcher);
+      }      
+    }, 1000);
   }
+
 
   render() {
     return (

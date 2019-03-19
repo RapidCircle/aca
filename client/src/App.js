@@ -50,12 +50,9 @@ class App extends Component {
     dispatch(checklogin());
 
     window.onmessage = (e) => {
-      if (e.data === 'setloggedin') {
+      if (e.data === 'checkloggedin') {
         dispatch(checklogin());
-      }
-      else if (e.data === 'setloggedout') {
-        dispatch(logout());
-      }
+      }      
     }
   }
 
