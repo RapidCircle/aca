@@ -8,9 +8,13 @@ import { startlogin } from '../../../actions/user.js';
 
 class Login extends Component {
 
-  login() {
+  login = () => {
     this.props.startlogin();
-    window.open('http://localhost:3000/_auth/signin');
+    let loginWindow = window.open('http://localhost:3000/_auth/signin', 'Login', 'titlbar=no, menubar=no, scrollbars=no, status=no, width=375, height=667, toolbar=no');
+    
+    loginWindow.addEventListener("beforeunload", function (e) {
+      alert('yo');
+    });
     
   }
 
@@ -26,7 +30,7 @@ class Login extends Component {
                     <div>
                       <h2>Unauthorized</h2>
                       <p><b>Azure Cleansing App</b> is configured to use your organisations Azure Active Directory as an identity store. Please click the Login to be redirected to login through Microsoft.</p>
-                      <a href="javascript:void(0);" onClick={this.openLogin}>
+                      <a href="javascript:void(0);" onClick={this.login}>
                         <Button className="mt-3 btn-lg btn-openid btn-brand" active tabIndex={-1}><i className="fa fa-openid"></i><span>Login</span></Button>
                       </a>
                     </div>

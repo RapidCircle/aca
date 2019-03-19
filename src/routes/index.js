@@ -20,12 +20,18 @@ router.get('/', function(req, res, next) {
 /* GET */
 router.get('/test', async function (req, res, next) {
 
-  let x = Math.floor(Math.random() * Math.floor(10000));
+  if (!req.isAuthenticated()) {
+    // Redirect unauthenticated requests to home page
+    res.redirect('/');
+  }
+  else {
+    let x = Math.floor(Math.random() * Math.floor(10000));
 
-  res.send({
-    amount: x.toString(),
-    description: 'Hello From Express'
-  });
+    res.send({
+      amount: x.toString(),
+      description: 'Hello From Express'
+    });
+  }
 });
 
 

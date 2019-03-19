@@ -47,7 +47,7 @@ router.get('/signout',
   function(req, res) {
     req.session.destroy(function(err) {
       req.logout();
-      res.redirect('http://localhost:3001/');
+      res.redirect('/');
     });
   }
 );

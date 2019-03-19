@@ -11,7 +11,7 @@ function receiveData(data) {
 
 function getApiData() {
     return dispatch => {
-        return fetch('http://localhost:3000/_api/test')
+        return fetch('/_api/test')
             .then(response => response.json())
             .then(data => dispatch(receiveData(data)))
     }

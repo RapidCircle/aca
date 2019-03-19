@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch';
+import axios from 'axios';
 import * as constants from '../constants.js';
 import createDebugger from 'debug';
 const debug = createDebugger('actions:user');
@@ -18,10 +19,10 @@ export const loggedin = data => {
 
 function getApiData() {
   return dispatch => {
-    return fetch('http://localhost:3000/_auth/info', {credentials:"same-origin"})
+    return axios.get('/_auth/info')
       .then(response => {
         if (response.status === 200) {
-          return response.json()
+          return response.data
         }
         else {
           throw new Error(`Bad response from server. ({response.status})`);

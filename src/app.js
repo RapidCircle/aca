@@ -7,6 +7,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const cors = require('cors');
+const proxy = require('express-http-proxy');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -172,6 +173,7 @@ app.use('/_api/users', usersRouter);
 app.use('/_auth', authRouter);
 app.use('/calendar', calendarRouter);
 app.use('/_api/init', initRouter);
+app.use('/', proxy('localhost:3001'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
