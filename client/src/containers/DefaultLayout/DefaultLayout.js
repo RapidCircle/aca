@@ -1,6 +1,8 @@
 import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/user.js';
 
 import {
   AppAside,
@@ -15,7 +17,8 @@ import {
   AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_nav';
+import navigation from '../../_aca_nav';
+//import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
 
@@ -28,8 +31,9 @@ class DefaultLayout extends Component {
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   signOut(e) {
-    e.preventDefault()
-    this.props.history.push('/login')
+    e.preventDefault();
+    this.props.dispatch(logout());
+    //this.props.history.push('/login')
   }
 
   render() {
@@ -72,11 +76,7 @@ class DefaultLayout extends Component {
               </Suspense>
             </Container>
           </main>
-          <AppAside fixed>
-            <Suspense fallback={this.loading()}>
-              <DefaultAside />
-            </Suspense>
-          </AppAside>
+          
         </div>
         <AppFooter>
           <Suspense fallback={this.loading()}>
@@ -88,4 +88,4 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout;
+export default connect(null)(DefaultLayout);

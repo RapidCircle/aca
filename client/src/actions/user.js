@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import axios from 'axios';
 import * as constants from '../constants.js';
 

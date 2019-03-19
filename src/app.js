@@ -170,10 +170,13 @@ app.use(function(req, res, next) {
 
 app.use('/_api', indexRouter);
 app.use('/_api/users', usersRouter);
+//app.use('/_api/resources', usersRouter);
+//app.use('/_api/workflows', usersRouter);
+app.use('/_api/jobs', require('./routes/jobs.js'));
+app.use('/_api/resources', require('./routes/resources.js'));
 app.use('/_auth', authRouter);
-app.use('/calendar', calendarRouter);
 app.use('/_api/init', initRouter);
-app.use('/', proxy('localhost:3001'))
+app.use('/', proxy('localhost:3001'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

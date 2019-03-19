@@ -13,7 +13,13 @@ module.exports = {
   getUserDetails: async function(accessToken) {
     const client = getAuthenticatedClient(accessToken);
 
-    const user = await client.api('/me').get();
+    const user = await client.api('/me').get();    
+    return user;
+  },
+
+  getUserPhoto: async function (accessToken) {
+    const client = getAuthenticatedClient(accessToken);
+    const user = await client.api('/me/photos/48x48/$value').responseType(graph.ResponseType.STREAM).get();
     return user;
   },
 

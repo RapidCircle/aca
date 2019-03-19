@@ -33,10 +33,8 @@ class Login extends Component {
                   <CardBody className="text-center">
                     <div>
                       <h2>Unauthorized</h2>
-                      <p><b>Azure Cleansing App</b> is configured to use your organisations Azure Active Directory as an identity store. Please click the Login to be redirected to login through Microsoft.</p>
-                      <a href="javascript:void(0);" onClick={this.login}>
-                        <Button className="mt-3 btn-lg btn-openid btn-brand" active tabIndex={-1}><i className="fa fa-openid"></i><span>Login</span></Button>
-                      </a>
+                      <p><b>Azure Cleansing App</b> is configured to use your organisations Azure Active Directory as an identity store. Please click the Login to be redirected to login through Microsoft.</p>                      
+                      <Button className="mt-3 btn-lg btn-openid btn-brand" active tabIndex={-1} onClick={this.login}><i className="fa fa-openid"></i><span>Login</span></Button>                      
                     </div>
                   </CardBody>
                 </Card>

@@ -2,3 +2,13 @@ export const USER_LOGGING_IN = 'USER_LOGGING_IN';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const REQUEST_ME = "REQUEST_ME";
+
+export const FETCH_RESOURCES = "FETCH_RESOURCES";
+export const FETCH_JOBS = "FETCH_JOBS";
+export const FETCH_WORKFLOWS = "FETCH_WORKFLOWS";
+
+export const LOAD_RESOURCES = "LOAD_RESOURCES";
+export const LOAD_JOBS = "LOAD_JOBS";
+export const LOAD_WORKFLOWS = "LOAD_WORKFLOWS";
+
+export const ERROR_FETCHING = "ERROR_FETCHING";
