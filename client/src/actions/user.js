@@ -15,6 +15,12 @@ export const loggedin = data => {
   };
 }
 
+export const loggedout = data => {
+  return {
+    type: constants.USER_LOGGED_OUT
+  }
+}
+
 function getApiData() {
   return dispatch => {
     return axios.get('/_auth/info')
@@ -31,6 +37,21 @@ function getApiData() {
   }
 }
 
+function logoutApi() {
+  return dispatch => {
+    return axios.get('/_auth/signout')
+      .then(response => {
+        if (response.status === 200) {
+          return response.data
+        } else {
+          return logout();
+        }
+      })
+      .then(data => dispatch(loggedout()))
+      .catch(err => dispatch(loggedout()))
+  }
+}
+
 export function checklogin() {
   return (dispatch, getState) => {
     return dispatch(getApiData());
@@ -38,7 +59,7 @@ export function checklogin() {
 }
 
 export function logout() {
-  return {
-    type: constants.USER_LOGGED_OUT
-  }
+  return (dispatch, getState) => {
+    return dispatch(logoutApi());
+  }  
 }

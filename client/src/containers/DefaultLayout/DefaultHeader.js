@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/aca.svg'
-import sygnet from '../../assets/img/brand/sygnet.svg'
+import logo_small from '../../assets/img/brand/aca_minimum.svg'
 import { connect } from 'react-redux';
 
 const propTypes = {
@@ -25,7 +25,7 @@ class DefaultHeader extends Component {
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <AppNavbarBrand
           full={{ src: logo, width: 155, height: 55, alt: 'ACA Logo' }}
-          minimized={{ src: sygnet, width: 30, height: 30, alt: 'ACA Logo' }}
+          minimized={{ src: logo_small, width: 52, height: 60, alt: 'ACA Logo' }}
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 

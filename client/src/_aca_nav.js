@@ -37,6 +37,11 @@ export default {
       },
     },
     {
+      name: 'Unclaimed',
+      url: '/base',
+      icon: 'icon-puzzle'
+    },
+    {
       name: 'By group',
       url: '/base',
       icon: 'icon-puzzle'      
@@ -80,7 +85,7 @@ export default {
     },
     {
       name: 'Goto Azure Portal',
-      url: 'https://coreui.io/react/',
+      url: 'https://portal.azure.com',
       icon: 'icon-cloud-download',
       class: 'mt-auto',
       variant: 'success',

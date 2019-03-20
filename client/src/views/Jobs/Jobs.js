@@ -20,7 +20,7 @@ class Jobs extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xl={6}>
+          <Col>
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Jobs <small className="text-muted">example</small>
@@ -48,6 +48,7 @@ class Jobs extends Component {
             </Card>
           </Col>
         </Row>
+        
       </div>
     )
   }
