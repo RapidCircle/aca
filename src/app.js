@@ -4,7 +4,6 @@
  @copyright© 2019 Rapid Circle B.V.
 **/
 
-const createError = require('http-errors');
 const express = require('express');
 const cors = require('cors');
 const proxy = require('express-http-proxy');
@@ -13,7 +12,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const LowDbSessionStore = require('nodejs-msgraph-utils/stores/lowDbSessionStore.js')(session);
-const flash = require('connect-flash');
 const passport = require('passport');
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 const graph = require('./graph');
@@ -95,11 +93,7 @@ passport.use(new OIDCStrategy(
   signInComplete
 ));
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
-var calendarRouter = require('./routes/calendar');
-var initRouter = require('./routes/init');
+
 
 var app = express();
 const sessionFile = path.resolve(__dirname, process.env.WEBSITES_ENABLE_APP_SERVICE_STORAGE? '/home/sessions.json': '../data/sessions.json');
@@ -118,83 +112,32 @@ app.use(session({
   store: new LowDbSessionStore({ filename: sessionFile })
 }));
 
-// Flash middleware
-app.use(flash());
-app.use(express.json());
-
-// Set up local vars for template layout
-app.use(function(req, res, next) {
-  // Read any flashed errors and save
-  // in the response locals
-  res.locals.error = req.flash('error_msg');
-
-  // Check for simple error string and
-  // convert to layout's expected format
-  var errs = req.flash('error');
-  for (var i in errs){
-    res.locals.error.push({message: 'An error occurred', debug: errs[i]});
-  }
-
-  next();
-});
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-
-var hbs = require('hbs');
-var moment = require('moment');
-// Helper to format date/time sent by Graph
-hbs.registerHelper('eventDateTime', function(dateTime){
-  return moment(dateTime).format('M/D/YY h:mm A');
-});
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
 
-app.use(function(req, res, next) {
-  // Set the authenticated user in the
-  // template locals
-  if (req.user) {
-    res.locals.user = req.user.profile;
-  }
-  next();
-});
-
-app.use('/_api', indexRouter);
-app.use('/_api/users', usersRouter);
+app.use('/_api/users', require('./routes/users.js'));
 //app.use('/_api/resources', usersRouter);
 //app.use('/_api/workflows', usersRouter);
 app.use('/_api/jobs', require('./routes/jobs.js'));
 app.use('/_api/resources', require('./routes/resources.js'));
 app.use('/_api/setup', require('./routes/setup.js'));
-app.use('/_auth', authRouter);
-app.use('/_api/init', initRouter);
+app.use('/_auth', require('./routes/auth'));
 app.use('/', proxy('localhost:3001'));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+const serializeError = require('serialize-error');
+
+app.use(function (err, req, res, next) {
+  let error = serializeError(err);
+  res.status(500).send(error);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 /* Register all Resource handling workflows */
 const workflow = require('./workflow.js');

@@ -18,7 +18,7 @@ db.defaults({
             "id": "cleanupEmptyResourceGroups",
             "enabled": false,
             "description": "Cleanup empty resource groups.",
-            "interval": 3600000,
+            "schedule": "*/10 * * * * *",
             "code": "../jobs/cleanupEmptyResourceGroups.js",
             "options": {
                 "runAsUserId": "<ENTER_YOUR_USER_ID>"
@@ -28,7 +28,7 @@ db.defaults({
             "id": "updateAzureResourceList",
             "enabled": false,
             "description": "Update the resource list with the latest Azure metrical data.",
-            "interval": 3600000,
+            "interval": "*/10 * * * * *",
             "code": "../jobs/updateAzureResourceList.js",
             "options": {
                 "runAsUserId": "<ENTER_YOUR_USER_ID>"
@@ -38,8 +38,19 @@ db.defaults({
             "id": "startWorkflows",
             "enabled": false,
             "description": "Kickstart workflows for resources that meet the criteria.",
-            "interval": 60000,
+            "interval": "0 * * * * *",
             "code": "../jobs/startWorkflows.js",
+            "options": {
+                "runAsUserId": "<ENTER_YOUR_USER_ID>"
+            }
+        },
+        {
+            "id": "refreshSharepointSiteTree",
+            "enabled": false,
+            "runOnceOnStart": true,
+            "description": "Synchronize the default site collection tree structure.",
+            "interval": "0 * * * *",
+            "code": "../jobs/refreshSharepointSiteTree.js",
             "options": {
                 "runAsUserId": "<ENTER_YOUR_USER_ID>"
             }
@@ -55,6 +66,9 @@ db.defaults({
         "ArchiveGroup": "",
         "ArchiveSAName": "",
         "ArchiveSAKey": ""
+    },
+    sharepointSites: {
+        default: {}
     },
     activeWorkflows: {}
 }).write();

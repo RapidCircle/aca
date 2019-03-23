@@ -35,7 +35,45 @@ module.exports = {
     return events;
   },
 
+  getTreeOfSites: async function(accessToken) {
 
+    let tree = {
+      id: '',
+      name: '',
+      sites: []
+    }
+    const client = getAuthenticatedClient(accessToken);
+
+    const getSubtree = async function(node, siteId) {      
+      const response = await client.api(`/sites/${siteId}`).get();
+      const children = await client.api(`/sites/${siteId}/sites`).get();
+      if (!node.id) node.id = response.id;
+      if (!node.name) node.name = response.name;
+
+      if (children.value.length > 0) {
+        node.sites = [];
+        for (let n=0;n<children.value.length;n++) {
+          let newNode = { id: children.value[n].id, name: children.value[n].displayName };
+          node.sites.push(await getSubtree(newNode, children.value[n].id));          
+        }        
+      }
+
+      return node;
+    }
+    
+    const root = await getSubtree(tree, 'root');
+
+    return root;
+  },  
+
+  getSiteInfo: async function(accessToken, relativeUrl) {
+    const client = getAuthenticatedClient(accessToken);
+    const response = await client.api(`/sites/${relativeUrl}`).get();
+    return response;
+  },
+
+
+  
   getResourcesMarkedWithStatus: async function(accessToken, status) {
     return new Promise(async (resolve, reject) => {
       const client = getAuthenticatedClient(accessToken);
@@ -77,13 +115,13 @@ module.exports = {
      - https://docs.microsoft.com/en-us/graph/api/resources/textcolumn?view=graph-rest-1.0
      - https://docs.microsoft.com/en-us/graph/api/resources/choicecolumn?view=graph-rest-1.0
     */
-  createAzureResourceList: async function(accessToken, statusses, actions, triggers) {
+  createAzureResourceList: async function(accessToken, name, siteId, statusses, actions, triggers) {
     return new Promise(async (resolve, reject) => {
       const client = getAuthenticatedClient(accessToken);
       await client
-        .api(`/sites/${process.env.graphSiteId}/lists`)
+        .api(`/sites/${siteId}/lists`)
         .post({
-          "displayName": "RClaimer",
+          "displayName": name,
           "columns": [
             { "name": "resourceId", "text": {} },
             { "name": "resourceName", "text": {} },

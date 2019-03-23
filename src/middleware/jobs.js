@@ -36,6 +36,22 @@ module.exports = {
     },
 
     async start(oauth2) {
+
+        const runJob = async function(job, options) {
+            let startAt = new Date();
+            debug.verbose(`Running job id ${job.id} at ${startAt}`);
+            if (job.lastStartAt) options.lastStartAt = new Date(job.lastStartAt);
+            if (job.lastEndAt) options.lastEndAt = new Date(job.lastEndAt);
+            if (job.secondsTillCompletion) options.secondsTillCompletion = new Date(job.secondsTillCompletion);
+            await require(path.join(__dirname, job.code))(options);
+            let endAt = new Date();
+            debug.verbose(`Finished job id ${job.id} at ${endAt}`);
+
+            db.get('jobs').find({id: job.id}).set('lastStartAt', startAt).write();
+            db.get('jobs').find({id: job.id}).set('lastEndAt', endAt).write();
+            db.get('jobs').find({id: job.id}).set('secondsTillCompletion', daysBetween(startAt, endAt)).write();
+        }
+
         let activeJobs = db.get('jobs').filter({
             enabled: true
         }).value();
@@ -52,21 +68,17 @@ module.exports = {
             try {
                 if (cron.validate(activeJobs[w].schedule)) {
                     debug.info(`Registered job ${activeJobs[w].id} - ${activeJobs[w].description}`);
-                    let job = cron.schedule(activeJobs[w].schedule, async () => {
-                        let startAt = new Date();
-                        debug.verbose(`Running job id ${activeJobs[w].id} at ${startAt}`);
-                        job.stop();
-                        if (activeJobs[w].lastStartAt) options.lastStartAt = new Date(activeJobs[w].lastStartAt);
-                        if (activeJobs[w].lastEndAt) options.lastEndAt = new Date(activeJobs[w].lastEndAt);
-                        if (activeJobs[w].secondsTillCompletion) options.secondsTillCompletion = new Date(activeJobs[w].secondsTillCompletion);
-                        await require(path.join(__dirname, activeJobs[w].code))(options);
-                        let endAt = new Date();
-                        debug.verbose(`Finished job id ${activeJobs[w].id} at ${endAt}`);
-                        job.start();
 
-                        db.get('jobs').find({id: activeJobs[w].id}).set('lastStartAt', startAt).write();
-                        db.get('jobs').find({id: activeJobs[w].id}).set('lastEndAt', endAt).write();
-                        db.get('jobs').find({id: activeJobs[w].id}).set('secondsTillCompletion', daysBetween(startAt, endAt)).write();
+                    if (activeJobs[w].runOnceOnStart) {
+                        setTimeout(async () => {
+                            await runJob(activeJobs[w], options);
+                        }, 1000);
+                    }
+
+                    let job = cron.schedule(activeJobs[w].schedule, async () => {
+                        job.stop();
+                        await runJob(activeJobs[w], options);                        
+                        job.start();
                     });
                     jobs.push(job);
                     job.start();

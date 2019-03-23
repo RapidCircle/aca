@@ -39,31 +39,20 @@ module.exports = {
         credentials = await loginWithServicePrincipalSecret();
         const resClient = new ResourceManagementClient(credentials, subscriptionId);
         
-        try {
-            return await resClient.resourceGroups.createOrUpdate(groupName, groupOptions);
-            console.log(result);
-        }
-        catch (err) {
-            console.log(err);
-        }        
+        return await resClient.resourceGroups.createOrUpdate(groupName, groupOptions);
     },
 
     createStorageAccount: async function(subscriptionId, groupName, accountName, accountOptions) {
         credentials = await loginWithServicePrincipalSecret();
         const resClient = new StorageManagementClient(credentials, subscriptionId);
-
-        try {
-            let alreadyExists = await resClient.storageAccounts.checkNameAvailabilityWithHttpOperationResponse(accountName);
-            if (alreadyExists.body.nameAvailable) {
-                return await resClient.storageAccounts.createWithHttpOperationResponse(groupName, accountName, accountOptions);
-            }
-            else {
-                throw new Error(alreadyExists.body.message);
-            }
+        
+        let alreadyExists = await resClient.storageAccounts.checkNameAvailabilityWithHttpOperationResponse(accountName);
+        if (alreadyExists.body.nameAvailable) {
+            return await resClient.storageAccounts.createWithHttpOperationResponse(groupName, accountName, accountOptions);
         }
-        catch (err) {
-            console.log('Error', err);
-        }  
+        else {
+            throw new Error(alreadyExists.body.message);
+        }
     },
 
     getResources: async function (subscriptionId) {
