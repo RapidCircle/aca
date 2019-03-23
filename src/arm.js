@@ -35,6 +35,37 @@ module.exports = {
         return keys;
     },
 
+    createGroup: async function (subscriptionId, groupName, groupOptions) {
+        credentials = await loginWithServicePrincipalSecret();
+        const resClient = new ResourceManagementClient(credentials, subscriptionId);
+        
+        try {
+            return await resClient.resourceGroups.createOrUpdate(groupName, groupOptions);
+            console.log(result);
+        }
+        catch (err) {
+            console.log(err);
+        }        
+    },
+
+    createStorageAccount: async function(subscriptionId, groupName, accountName, accountOptions) {
+        credentials = await loginWithServicePrincipalSecret();
+        const resClient = new StorageManagementClient(credentials, subscriptionId);
+
+        try {
+            let alreadyExists = await resClient.storageAccounts.checkNameAvailabilityWithHttpOperationResponse(accountName);
+            if (alreadyExists.body.nameAvailable) {
+                return await resClient.storageAccounts.createWithHttpOperationResponse(groupName, accountName, accountOptions);
+            }
+            else {
+                throw new Error(alreadyExists.body.message);
+            }
+        }
+        catch (err) {
+            console.log('Error', err);
+        }  
+    },
+
     getResources: async function (subscriptionId) {
         let credentials = await loginWithServicePrincipalSecret();
         const resClient = new ResourceManagementClient(credentials, subscriptionId);

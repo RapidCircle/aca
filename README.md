@@ -144,3 +144,9 @@ To make things even easier and more scalable ACA has been dockerized. The challe
 * https://docs.microsoft.com/nl-nl/azure/automation/automation-first-runbook-textual-powershell
 * https://docs.microsoft.com/nl-nl/azure/automation/automation-runbook-gallery
 * https://azure.microsoft.com/nl-nl/blog/azure-automation-runbook-input-output-and-nested-runbooks/
+
+
+# Implementing the first provisioning steps like SPN 
+* https://www.npmjs.com/package/ms-rest-azure
+* https://docs.microsoft.com/en-us/powershell/azure/azurerm/create-azure-service-principal-azureps?view=azurermps-6.13.0
+* https://docs.microsoft.com/en-us/javascript/azure/node-sdk-azure-authenticate-principal?view=azure-node-latest
