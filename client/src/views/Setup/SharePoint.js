@@ -3,7 +3,21 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { logout } from '../../actions/user.js';
 import { Link } from 'react-router-dom';
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table, Jumbotron, Button } from 'reactstrap';
+import {
+  Badge,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Row,
+  Table,
+  Jumbotron,
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import { fetchSharepoint, setSharepoint } from '../../actions/setup.js';
 import { Treebeard, decorators } from 'react-treebeard';
@@ -105,6 +119,12 @@ class SharePoint extends Component {
     dispatch(fetchSharepoint());
   }
 
+  toggleDanger = () => {
+    this.setState({
+      danger: !this.state.danger,
+    });
+  }
+
   onToggle = (node, toggled) => {
     if(this.state.cursor){this.state.cursor.active = false;}
     if (!node.id) return;
@@ -113,11 +133,30 @@ class SharePoint extends Component {
     this.setState({ cursor: node, hasChanged: true });
   }
 
-  setSharePointSite = (e) => {
+  setSharePointSite = async (e) => {
     
     let { dispatch } = this.props;
 
-    dispatch(setSharepoint(this.state.cursor.id));
+    let result = await dispatch(setSharepoint(this.state.cursor.id));
+    if (result.type === "ERROR_FETCHING") {
+        this.setState({
+            errorTitle: 'Error while saving SharePoint configuration.',
+            errorMessage: result.payload.response.data.message,
+            danger: !this.state.danger,
+        })        
+    }
+    else {
+        this.setState( {
+            ...this.state,
+            hasChanged: false
+        });
+    }
+  }
+
+  undoChanges = (e) => {
+    
+    let { dispatch } = this.props;    
+    dispatch(fetchSharepoint(this.state.cursor.id));
 
     this.setState( {
         ...this.state,
@@ -127,9 +166,10 @@ class SharePoint extends Component {
 
   render() {
 
-    let { sharepoint } = this.props;
+    let { sharepoint, error } = this.props;
+    
     if (!sharepoint.tree) {
-        sharepoint.tree = { id:'', name: '', loading: true, children: [] }        
+        sharepoint.tree = { id:'', name: 'Home', loading: true, children: [] }        
     }
     if (!sharepoint.current) {
         sharepoint.current = {};
@@ -168,14 +208,17 @@ class SharePoint extends Component {
             
             <h3>Configure storage</h3>
             <hr className="my-2" />
-            <p>Azure resource metadata is synchronized with SharePoint so ACA to autonomously track resources and guard policies and execute workflows.</p>            
+            <p>Azure resource metadata is synchronized with a SharePoint list enabling ACA to autonomously track resources, guard policies and execute workflows.</p>            
 
             <Row>
                 <Col>
                     <Card>
                     <CardHeader>
                         <div className="card-header-actions">
-                            <Button block outline={!this.state.hasChanged} disabled={!this.state.hasChanged} size="sm" color="primary" onClick={this.setSharePointSite}>Save</Button>
+                            { this.state.hasChanged &&
+                            <Button outline size="sm" color="primary" onClick={this.undoChanges}>Cancel</Button>
+                            } &nbsp;
+                            <Button outline={!this.state.hasChanged} disabled={!this.state.hasChanged} size="sm" color="primary" onClick={this.setSharePointSite}>Save</Button>
                         </div>
                         <i className="fa fa-align-justify"></i> Sites <small className="text-muted">sites listed in the default site collection</small>
                     </CardHeader>
@@ -189,7 +232,18 @@ class SharePoint extends Component {
                     </Card>
                 </Col>
             </Row>
+
             
+            <Modal isOpen={this.state.danger} toggle={this.toggleDanger} className={'modal-danger ' + this.props.className}>
+                <ModalHeader toggle={this.toggleDanger}>{this.state.errorTitle}</ModalHeader>
+                <ModalBody>
+                {this.state.errorMessage}
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={this.toggleDanger}>Dismiss</Button>{' '}
+                    <Button color="secondary" onClick={this.toggleDanger}>Cancel</Button>
+                </ModalFooter>
+            </Modal>            
             
         </div>
     )
@@ -197,10 +251,11 @@ class SharePoint extends Component {
 }
 
 function mapStateToProps(state) {
-  const { sharepoint } = state;
+  const { sharepoint, error } = state;
 
   return {
-    sharepoint
+    sharepoint,
+    error
   }
 }
 

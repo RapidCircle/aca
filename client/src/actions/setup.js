@@ -11,11 +11,11 @@ export const loadSites = data => dispatch => {
   });
 }
 
-export const setActive = data => dispatch => {
-  dispatch({
+export function setActive(data) {
+  return {
     type: constants.SET_SHAREPOINTCONFIG,
     payload: data
-  });
+  };
 }
 
 export const loadArchive = data => dispatch => {

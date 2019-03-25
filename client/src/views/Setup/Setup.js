@@ -47,7 +47,7 @@ class Setup extends Component {
                         <Route key="0" path={`${match.url}/sharepoint`} name="SharePoint" render={ props => ( <SharePoint {...props} /> )} />
                         <Route key="1" path={`${match.url}/archive`} name="Archive" render={ props => ( <Archive {...props} /> )} />
                         <Route key="2" path={`${match.url}/jobs`} name="Jobs" render={props=> ( <Jobs {...props} /> )} />                
-                        <Redirect from={`/${match.url}`} to={`${match.url}/sharepoint`} />
+                        <Redirect from={match.url} to={`${match.url}/sharepoint`} />
                     </Switch>
                     </Suspense>
                   </Container>
