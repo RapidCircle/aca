@@ -206,7 +206,7 @@ class SharePoint extends Component {
 
         <div className="animated fadeIn">
             
-            <h3>Configure storage</h3>
+            <h3>Resource storage</h3>
             <hr className="my-2" />
             <p>Azure resource metadata is synchronized with a SharePoint list enabling ACA to autonomously track resources, guard policies and execute workflows.</p>            
 
@@ -232,7 +232,6 @@ class SharePoint extends Component {
                     </Card>
                 </Col>
             </Row>
-
             
             <Modal isOpen={this.state.danger} toggle={this.toggleDanger} className={'modal-danger ' + this.props.className}>
                 <ModalHeader toggle={this.toggleDanger}>{this.state.errorTitle}</ModalHeader>
