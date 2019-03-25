@@ -35,12 +35,12 @@ module.exports = {
     return events;
   },
 
-  getTreeOfSites: async function(accessToken) {
+  getTreeOfSites: async function(accessToken, activeSiteId = '') {
 
     let tree = {
       id: '',
       name: '',
-      sites: []
+      children: []
     }
     const client = getAuthenticatedClient(accessToken);
 
@@ -48,13 +48,13 @@ module.exports = {
       const response = await client.api(`/sites/${siteId}`).get();
       const children = await client.api(`/sites/${siteId}/sites`).get();
       if (!node.id) node.id = response.id;
-      if (!node.name) node.name = response.name;
+      if (!node.name) node.name = response.displayName;
 
       if (children.value.length > 0) {
-        node.sites = [];
+        node.children = [];
         for (let n=0;n<children.value.length;n++) {
           let newNode = { id: children.value[n].id, name: children.value[n].displayName };
-          node.sites.push(await getSubtree(newNode, children.value[n].id));          
+          node.children.push(await getSubtree(newNode, children.value[n].id));
         }        
       }
 
