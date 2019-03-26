@@ -28,17 +28,14 @@ class Setup extends Component {
                 <CardBody>
                   <Nav pills>
                       <NavItem>
-                          <NavLink href={`#${match.url}/sharepoint`} active={location.pathname===`${match.url}/sharepoint`}>SharePoint</NavLink>
+                          <NavLink href={`#${match.url}/sharepoint`} active={location.pathname===`${match.url}/sharepoint`}>Storage</NavLink>
                       </NavItem>            
                       <NavItem>
                           <NavLink href={`#${match.url}/archive`} active={location.pathname===`${match.url}/archive`}>Archive</NavLink>
                       </NavItem>
                       <NavItem>
                           <NavLink href={`#${match.url}/jobs`} active={location.pathname===`${match.url}/jobs`}>Jobs</NavLink>
-                      </NavItem>
-                      <NavItem>
-                          <NavLink href={`#${match.url}/workflows`} active={location.pathname===`${match.url}/workflows`}>Workflows</NavLink>
-                      </NavItem>
+                      </NavItem>                      
                   </Nav>
                   <br/>
                   <Container fluid>

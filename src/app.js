@@ -123,9 +123,8 @@ app.use(passport.session());
 app.use(cors());
 
 app.use('/_api/users', require('./routes/users.js'));
-//app.use('/_api/resources', usersRouter);
-//app.use('/_api/workflows', usersRouter);
 app.use('/_api/jobs', require('./routes/jobs.js'));
+app.use('/_api/workflows', require('./routes/workflows.js'));
 app.use('/_api/resources', require('./routes/resources.js'));
 app.use('/_api/setup', require('./routes/setup.js'));
 app.use('/_auth', require('./routes/auth'));

@@ -12,7 +12,7 @@ const router = express.Router();
 const pwsh = require('../pwsh.js');
 const workflow = require('../workflow.js');
 const db = require('../db.js');
-const pc = require('prettycron');
+
 
 /* GET */
 router.get('/', async function (req, res, next) {
@@ -21,23 +21,33 @@ router.get('/', async function (req, res, next) {
         // Redirect unauthenticated requests to home page
         res.sendStatus(401);
     } else {
-        
-        let jobs = db.get('jobs').value();
-        jobs = _.map(jobs, (job)=> Object.assign({ runsAt: pc.toString(job.schedule) }, job));
-        res.send(jobs);
+        let workflows = db.get('activeWorkflows').value();        
+        res.send(workflows);
     }
 });
 
 /* GET */
-router.post('/:jobId', async function (req, res, next) {
+router.get('/settings', async function (req, res, next) {
+
+    if (!req.isAuthenticated()) {
+        // Redirect unauthenticated requests to home page
+        res.sendStatus(401);
+    } else {    
+        let config = db.get('workflowConfiguration').value();        
+        res.send(config);
+    }
+});
+
+/* GET */
+router.post('/settings', async function (req, res, next) {
 
     if (!req.isAuthenticated()) {
         // Redirect unauthenticated requests to home page
         res.sendStatus(401);
     } else {
-        let { jobId } = req.params;
-        if (req.body.hasOwnProperty('enabled')) db.get('jobs').find({id:jobId}).assign( {enabled: req.body.enabled}).write();
-        if (req.body.hasOwnProperty('schedule')) db.get('jobs').find({id:jobId}).assign( {schedule: req.body.schedule}).write();        
+        if (req.body.hasOwnProperty('enabled')) db.set('workflowConfiguration', req.body.enabled).write();
+        if (req.body.hasOwnProperty('interval')) db.set('workflowConfiguration', req.body.interval).write();
+        if (req.body.hasOwnProperty('runas')) db.set('workflowConfiguration', req.body.runas).write();
         res.sendStatus(204);
     }
 });

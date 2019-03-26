@@ -42,7 +42,10 @@ router.post('/callback',
     )(req,res,next);
   },
   function(req, res) {
-    res.render('loggedin');
+    res.send(`<script type="text/javascript">
+                window.opener.postMessage('checkloggedin', '*');
+                window.close();
+              </script>`);
   }
 );
 

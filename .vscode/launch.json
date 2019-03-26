@@ -7,14 +7,8 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Service",
+            "name": "Debug Server",
             "program": "${workspaceFolder}/run.js"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug Client and Service",
-            "program": "${workspaceFolder}/debug.js"
         }
     ]
 }
